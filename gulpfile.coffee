@@ -1,13 +1,20 @@
-gulp   = require 'gulp'
+gulp = require 'gulp'
 coffee = require 'gulp-coffee'
-util   = require 'gulp-util'
+util = require 'gulp-util'
+
+paths =
+  src: './src/**/*.coffee'
+  dest: './lib/'
+
 
 gulp.task 'coffee', ->
-  gulp.src './src/*.coffee'
-    .pipe coffee({bare: true}).on('error', util.log)
-    .pipe gulp.dest('./lib/')
+  gulp.src paths.src
+    .pipe coffee bare: true
+      .on 'error', util.log
+    .pipe gulp.dest paths.dest
 
 gulp.task 'watch', ->
-  gulp.watch './src/*', ['coffee']
+  gulp.watch paths.src, ['coffee']
+
 
 gulp.task 'default', ['coffee', 'watch']
